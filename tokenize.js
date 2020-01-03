@@ -41,8 +41,11 @@ const contractions = [
   /\s('t)(was)\b/i
 ];
 
-const treebank = function (value) {
-  value = value.
+const treebank = function (string, {
+  stripPunctuation = configuration.stripPunctuation,
+  stripStopwords = configuration.stripStopwords
+} = {}) {
+  string = string.
     replace(/^"/, '``').
     replace(/([ (\[{<])"/g, '$1 `` '). // eslint-disable-line no-useless-escape
     replace(/\.\.\./g, ' ... ').
@@ -52,21 +55,31 @@ const treebank = function (value) {
     replace(/[\]\[()\{\}<>]/g, ' $& '). // eslint-disable-line no-useless-escape
     replace(/--/g, ' -- ');
 
-  value = ` ${ value } ` .
+  string = ` ${ string } ` .
     replace(/"/g, ' \'\' ').
     replace(/([^'])' /g, '$1 \' ').
     replace(/'([sSmMdD]) /g, ' \'$1 ').
     replace(/('ll|'LL|'re|'RE|'ve|'VE|n't|N'T) /g, ' $1 ');
 
   for (const contraction of contractions) {
-    value = value.replace(contraction, ' $1 $2 ');
+    string = string.replace(contraction, ' $1 $2 ');
   }
 
-  value = value.
+  string = string.
     replace(/\s\s+/g, ' ').
-    replace(/^\s|\s$/g, '');
+    trim();
 
-  return value.split(' ');
+  let tokens = string.split(/\s+/) || [];
+
+  if (stripPunctuation) {
+    tokens = tokens.filter(token => { return isNotPunctuation(token); });
+  }
+
+  if (stripStopwords) {
+    tokens = tokens.filter(token => { return isNotStopword(token); });
+  }
+
+  return tokens;
 };
 
 tokenize.treebank = treebank;
