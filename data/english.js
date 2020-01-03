@@ -1,7 +1,6 @@
 'use strict';
 
-// eslint-disable-next-line no-useless-escape
-const punctuationRegExp = /^[~`!@#$%^&*()-_=+\[{\]}\|;:'",<.>\/?]+$/;
+const punctuationRegExp = /^([~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]+)$/;
 
 const tokens = [
   '[a-zA-Z]+-[a-zA-Z]+', // hyphenated words
