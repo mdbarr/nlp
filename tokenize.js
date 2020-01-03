@@ -73,4 +73,13 @@ tokenize.treebank = treebank;
 
 //////////
 
+function sentences (value) {
+  value = value.replace(/\n+/, ' ').
+    replace(/(\.+|:|!|\?)("*|'*|\)*|}*|]*)(\s|\n|\r|\r\n)/gm, '$1$2\n').
+    split(/\n+/);
+
+  return value;
+}
+tokenize.sentences = sentences;
+
 module.exports = tokenize;
