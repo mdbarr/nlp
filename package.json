@@ -12,7 +12,7 @@
     "jest": "^24.9.0"
   },
   "scripts": {
-    "lint": "eslint *.js",
+    "lint": "eslint *.js test/*.js",
     "test": "jest"
   }
 }

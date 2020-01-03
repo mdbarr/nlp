@@ -32,6 +32,18 @@ describe('Natural Lanuage Processing Tools Test', () => {
     expect(tokens).toStrictEqual([ 'test' ]);
   });
 
+  it('should test complicated tokenization', () => {
+    const tokens = nlp.tokenize(
+      'Hello Mr. Barr, how are you doing today? The weather is great at 71.5 degrees, and ' +
+        'JavaScript is awesome. The sky is pinkish-blue. You shouldn\'t eat cardboard.',
+      { stripPunctuation: false });
+
+    expect(tokens).toStrictEqual([ 'Hello', 'Mr.', 'Barr', ',', 'how', 'are', 'you', 'doing',
+      'today', '?', 'The', 'weather', 'is', 'great', 'at', '71.5', 'degrees', ',', 'and',
+      'JavaScript', 'is', 'awesome', '.', 'The', 'sky', 'is', 'pinkish-blue', '.',
+      'You', "shouldn't", 'eat', 'cardboard', '.' ]);
+  });
+
   it('should test camel casing', () => {
     expect(nlp.utilities.toCamelCase('this is a test.')).toBe('thisIsATest.');
   });

@@ -11,7 +11,7 @@ module.exports = function (string, {
   stripStopwords = configuration.stripStopwords
 } = {}) {
   let tokens = string.toString().
-    match(tokenizer);
+    match(tokenizer) || [];
 
   if (stripPunctuation) {
     tokens = tokens.filter(token => { return isNotPunctuation(token); });

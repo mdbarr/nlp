@@ -3,11 +3,11 @@
 const { configuration } = require('./configuration');
 
 function isNotPunctuation (string) {
-  return !configuration.language.punctuationRegExp.test(string);
+  return configuration.language.punctuationRegExp.test(string) === false;
 }
 
 function isNotStopword (word) {
-  return !configuration.language.stopwordsRegExp.test(word);
+  return configuration.language.stopwordsRegExp.test(word) === false;
 }
 
 function isPunctuation (string) {

@@ -3,8 +3,17 @@
 // eslint-disable-next-line no-useless-escape
 const punctuationRegExp = /^[~`!@#$%^&*()-_=+\[{\]}\|;:'",<.>\/?]+$/;
 
-// eslint-disable-next-line no-useless-escape
-const tokenizerRegExp = /\w+-\w+|\w+'\w+|\w+|[~`!@#$%^&*()_\-+={}\[\]|\\;:'"<>,.?/]/g;
+const tokens = [
+  '[a-zA-Z]+-[a-zA-Z]+', // hyphenated words
+  '[a-zA-Z]+\'[a-zA-Z]+', // words with contractions
+  '[A-Z][a-z]+\\.', // abbreviations
+  '[a-zA-Z]+', // bare words
+  '\\d+(?:\\.\\d+)?', // integers and floats
+  '\\d{1,3}(?:,\\d\\d\\d)+(?:\\.\\d+)?', // formatted numbers
+  '\\.{3}', // ellipsis
+  '[~`!@#$%^&*()_\\-+={}\[\\]|\\\\;:\'"<>,.?/]' // punctuation
+];
+const tokenizerRegExp = new RegExp(`(${ tokens.join('|') })`, 'g');
 
 const stopwords = [
   'a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and', 'any', 'are',
@@ -25,7 +34,7 @@ const stopwords = [
   "you're", "you've", 'your', 'yours', 'yourself', 'yourselves'
 ];
 
-const stopwordsRegExp = new RegExp(`^${ stopwords.join('|') }$`, 'i');
+const stopwordsRegExp = new RegExp(`^(${ stopwords.join('|') })$`, 'i');
 
 const stopwordsExtended = [
   'a', 'able', 'about', 'above', 'abst', 'accordance', 'according', 'accordingly', 'across', 'act',
@@ -96,7 +105,7 @@ const stopwordsExtended = [
   'yourselves', "you've", 'z', 'zero'
 ];
 
-const stopwordsExtendedRegExp = new RegExp(`^${ stopwordsExtended.join('|') }$`, 'i');
+const stopwordsExtendedRegExp = new RegExp(`^(${ stopwordsExtended.join('|') })$`, 'i');
 
 module.exports = {
   punctuationRegExp,
