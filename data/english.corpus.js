@@ -13,7 +13,7 @@ const corpus = {
 };
 
 const data = fs.readFileSync(join(__dirname, 'english.data'));
-console.log('raw data loaded!');
+
 for (let start = 0, i = 0; i < data.length; i++) {
   if (data[i] === 10) {
     const line = data.subarray(start, i).toString();
@@ -46,11 +46,12 @@ for (let start = 0, i = 0; i < data.length; i++) {
         corpus.words.set(word, model);
         corpus.forms.set(root, forms);
         corpus.metaphones.set(meta, metaphones);
-
-        corpus.size++;
       }
     }
     start = i + 1;
   }
 }
-console.log('corpus built', corpus.size);
+
+corpus.size = corpus.words.size;
+
+module.exports = corpus;
