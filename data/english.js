@@ -1,5 +1,7 @@
 'use strict';
 
+const corpus = require('./english.corpus');
+
 const punctuationRegExp = /^([~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]+)$/;
 
 const tokens = [
@@ -107,6 +109,7 @@ const stopwordsExtended = [
 const stopwordsExtendedRegExp = new RegExp(`^(${ stopwordsExtended.join('|') })$`, 'i');
 
 module.exports = {
+  corpus,
   punctuationRegExp,
   stopwords,
   stopwordsRegExp,
