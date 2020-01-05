@@ -7,7 +7,7 @@ const metaphone = require('../metaphone');
 
 const corpus = {
   words: new Map(),
-  forms: new Map(),
+  morphology: new Map(),
   metaphones: new Map(),
   size: 0
 };
@@ -31,10 +31,10 @@ for (let start = 0, i = 0; i < data.length; i++) {
           pos
         };
 
-        const forms = corpus.forms.get(root) || [ ];
-        if (!forms.includes(word)) {
-          forms.push(word);
-          forms.sort();
+        const morphology = corpus.morphology.get(root) || [ ];
+        if (!morphology.includes(word)) {
+          morphology.push(word);
+          morphology.sort();
         }
 
         const metaphones = corpus.metaphones.get(meta) || [ ];
@@ -44,7 +44,7 @@ for (let start = 0, i = 0; i < data.length; i++) {
         }
 
         corpus.words.set(word, model);
-        corpus.forms.set(root, forms);
+        corpus.morphology.set(root, morphology);
         corpus.metaphones.set(meta, metaphones);
       }
     }
