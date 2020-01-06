@@ -47,7 +47,6 @@ for (let start = 0, i = 0; i < data.length; i++) {
         }
         corpus.morphology.set(root, morphology);
 
-
         const metaphones = corpus.metaphones.get(model.metaphone) || [ ];
         if (!metaphones.includes(word)) {
           metaphones.push(word);

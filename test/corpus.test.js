@@ -6,10 +6,10 @@ describe('Natural Lanuage Processing - Corpus Test', () => {
   it('should get the description of a word', () => {
     const description = nlp.corpus.describe('left');
     expect(description).toStrictEqual({
-        word: 'left',
-        roots: [ 'leave', 'left' ],
-        metaphone: 'LFT',
-        pos: [ 'A', 'Adv', 'N', 'Vpp', 'Vpt' ]
+      word: 'left',
+      roots: [ 'leave', 'left' ],
+      metaphone: 'LFT',
+      pos: [ 'A', 'Adv', 'N', 'Vpp', 'Vpt' ]
     });
   });
 

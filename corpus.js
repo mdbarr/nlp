@@ -18,7 +18,7 @@ const equivalence = (word) => {
     for (const root of roots) {
       const morphs = corpus.morphology.get(root);
       if (morphs) {
-        morphs.forEach(item => equivs.add(item));
+        morphs.forEach(item => { return equivs.add(item); });
       }
     }
     return Array.from(equivs).sort();
