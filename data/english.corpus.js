@@ -22,30 +22,38 @@ for (let start = 0, i = 0; i < data.length; i++) {
       const [ word, root, pos ] = line.split(/[,:]/);
 
       if (word && root && pos) {
-        const meta = metaphone(word);
-
-        const model = {
+        const model = corpus.words.get(word) || {
           word,
-          root,
-          metaphone: meta,
-          pos
+          roots: [ ],
+          metaphone: metaphone(word),
+          pos: [ ]
         };
+
+        if (!model.roots.includes(root)) {
+          model.roots.push(root);
+          model.roots.sort();
+        }
+
+        if (!model.pos.includes(pos)) {
+          model.pos.push(pos);
+          model.pos.sort();
+        }
+        corpus.words.set(word, model);
 
         const morphology = corpus.morphology.get(root) || [ ];
         if (!morphology.includes(word)) {
           morphology.push(word);
           morphology.sort();
         }
+        corpus.morphology.set(root, morphology);
 
-        const metaphones = corpus.metaphones.get(meta) || [ ];
+
+        const metaphones = corpus.metaphones.get(model.metaphone) || [ ];
         if (!metaphones.includes(word)) {
           metaphones.push(word);
           metaphones.sort();
         }
-
-        corpus.words.set(word, model);
-        corpus.morphology.set(root, morphology);
-        corpus.metaphones.set(meta, metaphones);
+        corpus.metaphones.set(model.metaphone, metaphones);
       }
     }
     start = i + 1;

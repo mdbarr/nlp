@@ -13,22 +13,29 @@ const equivalence = (word) => {
   const corpus = configuration.language.corpus;
   const model = corpus.words.get(word) || corpus.words.get(word.toLowerCase());
   if (model) {
-    const root = model.root;
-    return corpus.morphology.get(root);
+    const roots = model.roots;
+    const equivs = new Set();
+    for (const root of roots) {
+      const morphs = corpus.morphology.get(root);
+      if (morphs) {
+        morphs.forEach(item => equivs.add(item));
+      }
+    }
+    return Array.from(equivs).sort();
   }
   return null;
 };
 
-const partOfSpeech = (word) => {
+const partsOfSpeech = (word) => {
   const corpus = configuration.language.corpus;
   const model = corpus.words.get(word) || corpus.words.get(word.toLowerCase());
   return model ? model.pos : null;
 };
 
-const root = (word) => {
+const roots = (word) => {
   const corpus = configuration.language.corpus;
   const model = corpus.words.get(word) || corpus.words.get(word.toLowerCase());
-  return model ? model.root : null;
+  return model ? model.roots : null;
 };
 
 const suggestions = (word) => {
@@ -41,10 +48,10 @@ const suggestions = (word) => {
 module.exports = {
   describe,
   equivalence,
-  partOfSpeech,
-  pos: partOfSpeech,
-  root,
-  stem: root,
+  partsOfSpeech,
+  pos: partsOfSpeech,
+  roots,
+  stems: roots,
   suggest: suggestions,
   suggestions
 };
