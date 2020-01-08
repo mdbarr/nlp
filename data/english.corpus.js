@@ -12,53 +12,63 @@ const corpus = {
   size: 0
 };
 
-const data = fs.readFileSync(join(__dirname, 'english.data'));
+let loaded = false;
 
-for (let start = 0, i = 0; i < data.length; i++) {
-  if (data[i] === 10) {
-    const line = data.subarray(start, i).toString();
-
-    if (line) {
-      const [ word, root, pos ] = line.split(/[,:]/);
-
-      if (word && root && pos) {
-        const model = corpus.words.get(word) || {
-          word,
-          roots: [ ],
-          metaphone: metaphone(word),
-          pos: [ ]
-        };
-
-        if (!model.roots.includes(root)) {
-          model.roots.push(root);
-          model.roots.sort();
-        }
-
-        if (!model.pos.includes(pos)) {
-          model.pos.push(pos);
-          model.pos.sort();
-        }
-        corpus.words.set(word, model);
-
-        const morphology = corpus.morphology.get(root) || [ ];
-        if (!morphology.includes(word)) {
-          morphology.push(word);
-          morphology.sort();
-        }
-        corpus.morphology.set(root, morphology);
-
-        const metaphones = corpus.metaphones.get(model.metaphone) || [ ];
-        if (!metaphones.includes(word)) {
-          metaphones.push(word);
-          metaphones.sort();
-        }
-        corpus.metaphones.set(model.metaphone, metaphones);
-      }
-    }
-    start = i + 1;
+module.exports = () => {
+  if (loaded) {
+    return corpus;
   }
-}
 
-corpus.size = corpus.words.size;
+  const data = fs.readFileSync(join(__dirname, 'english.data'));
 
-module.exports = corpus;
+  for (let start = 0, i = 0; i < data.length; i++) {
+    if (data[i] === 10) {
+      const line = data.subarray(start, i).toString();
+
+      if (line) {
+        const [ word, root, pos ] = line.split(/[,:]/);
+
+        if (word && root && pos) {
+          const model = corpus.words.get(word) || {
+            word,
+            roots: [ ],
+            metaphone: metaphone(word),
+            pos: [ ]
+          };
+
+          if (!model.roots.includes(root)) {
+            model.roots.push(root);
+            model.roots.sort();
+          }
+
+          if (!model.pos.includes(pos)) {
+            model.pos.push(pos);
+            model.pos.sort();
+          }
+          corpus.words.set(word, model);
+
+          const morphology = corpus.morphology.get(root) || [ ];
+          if (!morphology.includes(word)) {
+            morphology.push(word);
+            morphology.sort();
+          }
+          corpus.morphology.set(root, morphology);
+
+          const metaphones = corpus.metaphones.get(model.metaphone) || [ ];
+          if (!metaphones.includes(word)) {
+            metaphones.push(word);
+            metaphones.sort();
+          }
+          corpus.metaphones.set(model.metaphone, metaphones);
+        }
+      }
+      start = i + 1;
+    }
+  }
+
+  corpus.size = corpus.words.size;
+
+  loaded = true;
+
+  return corpus;
+};

@@ -4,13 +4,13 @@ const { configuration } = require('./configuration');
 const metaphone = require('./metaphone');
 
 const describe = (word) => {
-  const corpus = configuration.language.corpus;
+  const corpus = configuration.language.corpus();
   const model = corpus.words.get(word) || corpus.words.get(word.toLowerCase());
   return model ? model : null;
 };
 
 const equivalence = (word) => {
-  const corpus = configuration.language.corpus;
+  const corpus = configuration.language.corpus();
   const model = corpus.words.get(word) || corpus.words.get(word.toLowerCase());
   if (model) {
     const roots = model.roots;
@@ -26,20 +26,24 @@ const equivalence = (word) => {
   return null;
 };
 
+const load = () => {
+  return configuration.language.corpus();
+};
+
 const partsOfSpeech = (word) => {
-  const corpus = configuration.language.corpus;
+  const corpus = configuration.language.corpus();
   const model = corpus.words.get(word) || corpus.words.get(word.toLowerCase());
   return model ? model.pos : null;
 };
 
 const roots = (word) => {
-  const corpus = configuration.language.corpus;
+  const corpus = configuration.language.corpus();
   const model = corpus.words.get(word) || corpus.words.get(word.toLowerCase());
   return model ? model.roots : null;
 };
 
 const suggestions = (word) => {
-  const corpus = configuration.language.corpus;
+  const corpus = configuration.language.corpus();
   const meta = metaphone(word);
   const metaphones = corpus.metaphones.get(meta);
   return metaphones ? metaphones : null;
@@ -48,6 +52,7 @@ const suggestions = (word) => {
 module.exports = {
   describe,
   equivalence,
+  load,
   partsOfSpeech,
   pos: partsOfSpeech,
   roots,
