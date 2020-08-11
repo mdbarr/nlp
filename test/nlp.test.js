@@ -27,7 +27,7 @@ describe('Natural Lanuage Processing Tools Test', () => {
   it('should test simple tokenization with stopword removal', () => {
     const tokens = nlp.tokenize('This is a test.', {
       stripPunctuation: true,
-      stripStopwords: true
+      stripStopwords: true,
     });
     expect(tokens).toStrictEqual([ 'test' ]);
   });
@@ -38,10 +38,12 @@ describe('Natural Lanuage Processing Tools Test', () => {
         'JavaScript is awesome. The sky is pinkish-blue. You shouldn\'t eat cardboard.',
       { stripPunctuation: false });
 
-    expect(tokens).toStrictEqual([ 'Hello', 'Mr.', 'Barr', ',', 'how', 'are', 'you', 'doing',
+    expect(tokens).toStrictEqual([
+      'Hello', 'Mr.', 'Barr', ',', 'how', 'are', 'you', 'doing',
       'today', '?', 'The', 'weather', 'is', 'great', 'at', '71.5', 'degrees', ',', 'and',
       'JavaScript', 'is', 'awesome', '.', 'The', 'sky', 'is', 'pinkish-blue', '.',
-      'You', "shouldn't", 'eat', 'cardboard', '.' ]);
+      'You', "shouldn't", 'eat', 'cardboard', '.',
+    ]);
   });
 
   it('should test camel casing', () => {

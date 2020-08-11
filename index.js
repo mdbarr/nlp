@@ -1,8 +1,6 @@
 'use strict';
 
-const {
-  configuration, configure
-} = require('./configuration');
+const { configuration, configure } = require('./configuration');
 const corpus = require('./corpus');
 const editDistance = require('./editDistance');
 const metaphone = require('./metaphone');
@@ -16,5 +14,5 @@ module.exports = {
   editDistance,
   metaphone,
   tokenize,
-  utilities
+  utilities,
 };

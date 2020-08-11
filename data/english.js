@@ -12,7 +12,7 @@ const tokens = [
   '\\d+(?:\\.\\d+)?', // integers and floats
   '\\d{1,3}(?:,\\d\\d\\d)+(?:\\.\\d+)?', // formatted numbers
   '\\.{3}', // ellipsis
-  '[~`!@#$%^&*()_\\-+={}\[\\]|\\\\;:\'"<>,.?/]' // punctuation
+  '[~`!@#$%^&*()_\\-+={}\[\\]|\\\\;:\'"<>,.?/]', // punctuation
 ];
 const tokenizerRegExp = new RegExp(`(${ tokens.join('|') })`, 'g');
 
@@ -32,7 +32,7 @@ const stopwords = [
   'under', 'until', 'up', 'very', 'was', "wasn't", 'we', "we'd", "we'll", "we're", "we've", 'were',
   "weren't", 'what', "what's", 'when', "when's", 'where', "where's", 'which', 'while', 'who',
   "who's", 'whom', 'why', "why's", 'with', "won't", 'would', "wouldn't", 'you', "you'd", "you'll",
-  "you're", "you've", 'your', 'yours', 'yourself', 'yourselves'
+  "you're", "you've", 'your', 'yours', 'yourself', 'yourselves',
 ];
 
 const stopwordsRegExp = new RegExp(`^(${ stopwords.join('|') })$`, 'i');
@@ -103,7 +103,7 @@ const stopwordsExtended = [
   'who', 'whod', 'whoever', 'whole', "who'll", 'whom', 'whomever', 'whos', 'whose', 'why', 'widely',
   'willing', 'wish', 'with', 'within', 'without', 'wont', 'words', 'world', 'would', 'wouldnt',
   'www', 'x', 'y', 'yes', 'yet', 'you', 'youd', "you'll", 'your', 'youre', 'yours', 'yourself',
-  'yourselves', "you've", 'z', 'zero'
+  'yourselves', "you've", 'z', 'zero',
 ];
 
 const stopwordsExtendedRegExp = new RegExp(`^(${ stopwordsExtended.join('|') })$`, 'i');
@@ -115,5 +115,5 @@ module.exports = {
   stopwordsRegExp,
   stopwordsExtended,
   stopwordsExtendedRegExp,
-  tokenizerRegExp
+  tokenizerRegExp,
 };

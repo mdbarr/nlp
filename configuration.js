@@ -5,11 +5,11 @@ const languages = require('./languages');
 const configuration = {
   language: languages.english,
   stripPunctuation: false,
-  stripStopwords: false
+  stripStopwords: false,
 };
 
 function configure ({
-  language, stripPunctuation, stripStopwords
+  language, stripPunctuation, stripStopwords,
 } = {}) {
   if (language && languages[language]) {
     configuration.language = languages[language];
@@ -28,5 +28,5 @@ function configure ({
 
 module.exports = {
   configuration,
-  configure
+  configure,
 };

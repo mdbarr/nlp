@@ -9,7 +9,7 @@ describe('Natural Lanuage Processing - Corpus Test', () => {
       word: 'left',
       roots: [ 'leave', 'left' ],
       metaphone: 'LFT',
-      pos: [ 'A', 'Adv', 'N', 'Vpp', 'Vpt' ]
+      pos: [ 'A', 'Adv', 'N', 'Vpp', 'Vpt' ],
     });
   });
 

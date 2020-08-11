@@ -9,7 +9,7 @@ const corpus = {
   words: new Map(),
   morphology: new Map(),
   metaphones: new Map(),
-  size: 0
+  size: 0,
 };
 
 let loaded = false;
@@ -33,7 +33,7 @@ module.exports = () => {
             word,
             roots: [ ],
             metaphone: metaphone(word),
-            pos: [ ]
+            pos: [ ],
           };
 
           if (!model.roots.includes(root)) {

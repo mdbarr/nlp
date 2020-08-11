@@ -14,7 +14,7 @@ const corpus = {
   words: new Map(),
   forms: new Map(),
   metaphones: new Map(),
-  size: 0
+  size: 0,
 };
 
 const data = fs.readFileSync(join(__dirname, 'english.data'));
@@ -33,7 +33,7 @@ for (let start = 0, i = 0; i < data.length; i++) {
           word,
           root,
           metaphone: meta,
-          pos
+          pos,
         };
 
         const forms = corpus.forms.get(root) || [ ];

@@ -18,7 +18,7 @@ const equivalence = (word) => {
     for (const root of roots) {
       const morphs = corpus.morphology.get(root);
       if (morphs) {
-        morphs.forEach(item => { return equivs.add(item); });
+        morphs.forEach(item => equivs.add(item));
       }
     }
     return Array.from(equivs).sort();
@@ -26,9 +26,7 @@ const equivalence = (word) => {
   return null;
 };
 
-const load = () => {
-  return configuration.language.corpus();
-};
+const load = () => configuration.language.corpus();
 
 const partsOfSpeech = (word) => {
   const corpus = configuration.language.corpus();
@@ -58,5 +56,5 @@ module.exports = {
   roots,
   stems: roots,
   suggest: suggestions,
-  suggestions
+  suggestions,
 };

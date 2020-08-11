@@ -9,7 +9,7 @@ Object.defineProperty(String.prototype, '$editDistance', {
     return editDistance(this, string);
   },
   enumerable: false,
-  configurable: true
+  configurable: true,
 });
 
 Object.defineProperty(String.prototype, '$metaphone', {
@@ -17,7 +17,7 @@ Object.defineProperty(String.prototype, '$metaphone', {
     return metaphone(this);
   },
   enumerable: false,
-  configurable: true
+  configurable: true,
 });
 
 Object.defineProperty(String.prototype, '$tokenize', {
@@ -25,7 +25,7 @@ Object.defineProperty(String.prototype, '$tokenize', {
     return tokenize(this, regExp);
   },
   enumerable: false,
-  configurable: true
+  configurable: true,
 });
 
 Object.defineProperty(String.prototype, '$treebank', {
@@ -33,5 +33,5 @@ Object.defineProperty(String.prototype, '$treebank', {
     return tokenize.treebank(this);
   },
   enumerable: false,
-  configurable: true
+  configurable: true,
 });

@@ -68,18 +68,10 @@ module.exports = function (value) {
     phonize: (characters) => {
       phonized += characters;
     },
-    at: (offset) => {
-      return value.charAt(index + offset).toUpperCase();
-    },
-    prev: () => {
-      return value.charAt(index - 1).toUpperCase();
-    },
-    current: () => {
-      return value.charAt(index).toUpperCase();
-    },
-    next: () => {
-      return value.charAt(index + 1).toUpperCase();
-    }
+    at: (offset) => value.charAt(index + offset).toUpperCase(),
+    prev: () => value.charAt(index - 1).toUpperCase(),
+    current: () => value.charAt(index).toUpperCase(),
+    next: () => value.charAt(index + 1).toUpperCase(),
   };
 
   while (!isAlpha(context.current())) {

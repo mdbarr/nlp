@@ -20,21 +20,17 @@ function isStopword (word) {
 
 function toCamelCase (string) {
   return string.toLowerCase().
-    replace(/[^a-zA-Z0-9]+(.)/g, (match, character) => {
-      return character.toUpperCase();
-    });
+    replace(/[^a-zA-Z0-9]+(.)/g, (match, character) => character.toUpperCase());
 }
 
 function toKebabCase (string) {
   return string.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).
-    map(word => { return word.toLowerCase(); }).
+    map(word => word.toLowerCase()).
     join('-');
 }
 
 function toPascalCase (string) {
-  return string.replace(/\w\S*/g, (word) => {
-    return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
-  });
+  return string.replace(/\w\S*/g, (word) => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase());
 }
 
 function toSentenceCase (string) {
@@ -43,7 +39,7 @@ function toSentenceCase (string) {
 
 function toSnakeCase (string) {
   return string.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).
-    map(word => { return word.toLowerCase(); }).
+    map(word => word.toLowerCase()).
     join('_');
 }
 
@@ -56,5 +52,5 @@ module.exports = {
   toKebabCase,
   toPascalCase,
   toSentenceCase,
-  toSnakeCase
+  toSnakeCase,
 };

@@ -1,26 +1,24 @@
 'use strict';
 
 const { configuration } = require('./configuration');
-const {
-  isNotPunctuation, isNotStopword
-} = require('./utilities');
+const { isNotPunctuation, isNotStopword } = require('./utilities');
 
 //////////
 
 const tokenize = function (string, {
   tokenizer = configuration.language.tokenizerRegExp,
   stripPunctuation = configuration.stripPunctuation,
-  stripStopwords = configuration.stripStopwords
+  stripStopwords = configuration.stripStopwords,
 } = {}) {
   let tokens = string.toString().
     match(tokenizer) || [];
 
   if (stripPunctuation) {
-    tokens = tokens.filter(token => { return isNotPunctuation(token); });
+    tokens = tokens.filter(token => isNotPunctuation(token));
   }
 
   if (stripStopwords) {
-    tokens = tokens.filter(token => { return isNotStopword(token); });
+    tokens = tokens.filter(token => isNotStopword(token));
   }
 
   return tokens;
@@ -38,13 +36,11 @@ const contractions = [
   /\b(more)('n)\b/i,
   /\b(wan)(na) /i,
   /\s('t)(is)\b/i,
-  /\s('t)(was)\b/i
+  /\s('t)(was)\b/i,
 ];
 
-const treebank = function (string, {
-  stripPunctuation = configuration.stripPunctuation,
-  stripStopwords = configuration.stripStopwords
-} = {}) {
+const treebank = function (string, { stripPunctuation = configuration.stripPunctuation,
+  stripStopwords = configuration.stripStopwords } = {}) {
   string = string.
     replace(/^"/, '``').
     replace(/([ (\[{<])"/g, '$1 `` '). // eslint-disable-line no-useless-escape
@@ -72,11 +68,11 @@ const treebank = function (string, {
   let tokens = string.split(/\s+/) || [];
 
   if (stripPunctuation) {
-    tokens = tokens.filter(token => { return isNotPunctuation(token); });
+    tokens = tokens.filter(token => isNotPunctuation(token));
   }
 
   if (stripStopwords) {
-    tokens = tokens.filter(token => { return isNotStopword(token); });
+    tokens = tokens.filter(token => isNotStopword(token));
   }
 
   return tokens;
